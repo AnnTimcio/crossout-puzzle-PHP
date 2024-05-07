@@ -9,4 +9,14 @@
             }
         }
     }
+
+    function fill_with_random(){
+        $letters= 'abcdefghijklmnoprstuwyz';
+        global $table;
+        for($y=0; $y < count($table); $y++){
+            for($x=0; $x < count($table[$y]); $x++){
+                $table[$y][$x] = $letters[rand(0, strlen($letters))-1];
+            }
+        }
+    }
 ?>
