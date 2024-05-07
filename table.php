@@ -19,4 +19,16 @@
             }
         }
     }
+    function display(){
+    echo '<table>';
+    global $table;
+    for($y=0; $y < count($table); $y++){
+        echo '<tr>';
+        for($x=0; $x <  count($table[$y]); $x++){
+            echo '<td>'.$table[$y][$x].'</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    }
 ?>
