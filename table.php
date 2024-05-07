@@ -25,7 +25,7 @@
     for($y=0; $y < count($table); $y++){
         echo '<tr>';
         for($x=0; $x <  count($table[$y]); $x++){
-            echo '<td>'.$table[$y][$x].'</td>';
+            echo '<td>'.'<button style="width:25px; height:25px;">'.$table[$y][$x].'</button>'.'</td>';
         }
         echo '</tr>';
     }
