@@ -9,7 +9,6 @@ function _try_add($word){
     $y = rand(0, $HEIGHT - 1);
     $dire = $pos_dir[array_rand($pos_dir)];
     $i = _can_add($x, $y, $word, $dire);
-echo "_can_add=$i";
     if( $i){
         add($x, $y, $word, $dire);
     }
@@ -27,7 +26,6 @@ function e_add($word){
 }
 function _can_add($x, $y, $word, $direction){
     global $table, $WIDTH, $HEIGHT;
-    echo "x= $x, y=$y,word=$word,dir=$direction";
     if ($direction == 'nw' || $direction == 'w' || $direction == 'sw'){
         if (strlen($word) > $x + 1){
             return False;}}
@@ -40,7 +38,7 @@ function _can_add($x, $y, $word, $direction){
     if ($direction == 'ne' || $direction == 'n' || $direction == 'nw'){
         if (strlen($word) > $y + 1){
             return False;}} 
-    echo "dsad";
+
     if ($direction == 'e'){
         return can_add_e($x, $y, $word);}
 
