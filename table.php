@@ -1,18 +1,26 @@
 <?php
     $table = array();
+    $WIDTH = 0;
+    $HEIGHT = 0;
+
     function init($w, $h){
-        global $table;
+        global $table, $WIDTH, $HEIGHT;
+
         for($y=0; $y < $h; $y++){
             $table [] = array();
             for($x=0; $x < $w; $x++){
                 $table[$y][] = ' ';
             }
         }
+
+        $HEIGHT = $h;
+        $WIDTH = $w;
     }
 
     function fill_with_random(){
         $letters= 'abcdefghijklmnoprstuwyz';
-        global $table;
+        global $table, $WIDTH, $HEIGHT;
+
         for($y=0; $y < count($table); $y++){
             for($x=0; $x < count($table[$y]); $x++){
                 $table[$y][$x] = $letters[rand(0, strlen($letters))-1];
@@ -30,5 +38,219 @@
         echo '</tr>';
     }
     echo '</table>';
+    }
+    function add_e($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH){
+                $table[$y][$x + $a] = $word[$i];
+            }
+            $a++;
+        }
+    }
+    function can_add_e($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH){
+                if ($table[$y][$x + $a] != ' ' && $table[$i][$x + $a] != $word[$i])
+                return FALSE;
+            }
+            $a++;
+        return TRUE;
+        }
+    }
+    function add_n($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($y + $a >= 0){
+                $table[$y + $a][$x] = $word[$i];
+            }
+            $a--;
+        }
+    }
+    function can_add_n($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($y + $a >= 0){
+                if ($table[$y + $a][$x] != ' ' && $table[$y + $a][$x] != $word[$i]){
+                    return FALSE;
+                }
+            }
+            $a--;
+        }
+        return true;
+    }
+    function add_ne($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH && $y + $b >=0){
+                $table[$y + $b][$x + $a] = $word[$i];
+            }
+            $a++;
+            $b--;
+        }
+    }
+    function can_add_ne($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH && $y + $b >=0){
+                if($table[$y + $b][$x + $a] != ' ' && $table[$y + $b][$x + $a] != $word[$i]){
+                    return false;
+                }
+            }
+            $a++;
+            $b--;
+        }
+        return true;
+    }
+    function add_se($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH && $y + $b < $HEIGHT){
+                $table[$y + $b][$x + $a] = $word[$i];
+            }
+            $a++;
+            $b++;
+        }
+    }
+    function can_add_se($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a < $WIDTH && $y + $b < $HEIGHT){
+                if ($table[$y + $b][$x + $a] != ' ' && $table[$y + $b][$x + $a] != $word[$i]){
+                    return FALSE;
+                }
+            }
+            $a++;
+            $b++;
+        }
+        return true;
+    }
+    function add_s($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($y + $a <=  $HEIGHT){
+                $table[$y + $a][$x] = $word[$i];
+            }
+            $a++;
+        }
+    }
+    function can_add_s($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($y + $a <=  $HEIGHT){
+                if ($table[$y + $a][$x] != ' ' && $table[$y + $a][$x] != $word[$i]){
+                    return false;
+                }
+            }
+            $a++;
+        }
+        return true;
+    }
+    function add_sw($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0 && $y + $b <=  $HEIGHT){
+                $table[$x + $a][$y + $b] = $word[$i];
+            }
+            $a--;
+            $b++;
+        }
+    }
+    function can_add_sw($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0 && $y + $b <=  $HEIGHT){
+                if($table[$x + $a][$y + $b] != ' ' && $table[$x + $a][$y + $b] != $word[$i]){
+                return false;}
+            }
+            $a--;
+            $b++;
+        }
+        return true;
+    }
+    function add_w($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0){
+                $table[$x + $a][$y] = $word[$i];
+            }
+            $a--;
+        }
+    }
+    function can_add_w($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0){
+                if($table[$x + $a][$y] != ' ' && $table[$x + $a][$y] != $word[$i]){
+                    return false;
+                }
+            }
+            $a--;
+        }
+        return true;
+    }
+    function add_nw($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0 && $y + $b >= 0){
+                $table[$x + $a][$y + $b] = $word[$i];
+            }
+            $a--;
+            $b--;
+        }
+    }
+    function can_add_nw($x, $y, $word){
+        global $table, $WIDTH, $HEIGHT;
+        $a = 0;
+        $b = 0;
+        $len = strlen($word);
+        for ($i = 0; $i < $len; $i++){
+            if($x + $a >=0 && $y + $b >= 0){
+                if($table[$x + $a][$y + $b] != ' ' && $table[$x + $a][$y + $b] != $word[$i]){
+                    return false;
+                }
+            }
+            $a--;
+            $b--;
+        }
+        return true;
     }
 ?>
