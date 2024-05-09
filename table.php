@@ -39,6 +39,37 @@
     }
     echo '</table>';
     }
+    function add($x, $y, $word, $dir){
+        if ($dir ==  'nw'){
+            add_nw($x, $y, $word);
+        }
+        else if ($dir ==  'e'){
+            add_e($x, $y, $word);
+        }
+        else if ($dir ==  'e'){
+            add_e($x, $y, $word);
+        }
+        else if ($dir ==  'n'){
+            add_n($x, $y, $word);
+        }
+        else if ($dir ==  'ne'){
+            add_ne($x, $y, $word);
+        }
+        else if ($dir ==  'se'){
+            add_se($x, $y, $word);
+        }
+        else if ($dir ==  's'){
+            add_s($x, $y, $word);
+        }
+        else if ($dir ==  'w'){
+            add_w($x, $y, $word);
+        }
+        else if ($dir ==  'sw'){
+            add_sw($x, $y, $word);
+        }
+    }
+
+
     function add_e($x, $y, $word){
         global $table, $WIDTH, $HEIGHT;
         $a = 0;
