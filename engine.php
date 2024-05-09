@@ -57,7 +57,7 @@ function _can_add($x, $y, $word, $direction){
         return can_add_sw($x, $y, $word);}
 
     if ($direction == 'se'){
-        return can_add_se($y, $word);}
+        return can_add_se($x, $y, $word);}
 
     if ($direction == 'ne'){
         return can_add_ne($x, $y, $word);}
