@@ -22,8 +22,8 @@
         global $table, $WIDTH, $HEIGHT;
 
         for($y=0; $y < count($table); $y++){
-            if ($table[$y] == ' '){
             for($x=0; $x < count($table[$y]); $x++){
+                if ($table[$y][$x] == ' '){
                 $table[$y][$x] = $letters[rand(0, strlen($letters))-1];
             }}
         }
