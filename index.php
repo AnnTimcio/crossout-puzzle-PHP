@@ -14,16 +14,19 @@
 include "./engine.php";
 include "./word_dict.php";
 init(10,10);
-$words = get_words(10);
+$words = get_words(20);
+$added_words = array();
 for($i=0; $i<count($words); $i++){
-    e_add($words[$i]);
+    if (e_add($words[$i])) {
+        $added_words[] = $words[$i];
+    }
 }
 
-#fill_with_random($table);
+fill_with_random($table);
 
 display();
-for($i= 0; $i<count($words); $i++){
-    echo "<input type='checkbox'>$words[$i]</input><br>";
+for($i= 0; $i<count($added_words); $i++){
+    echo "<input type='checkbox'>$added_words[$i]</input><br>";
 }
 
 ?>
