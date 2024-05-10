@@ -11,7 +11,9 @@ function _try_add($word){
     $i = _can_add($x, $y, $word, $dire);
     if( $i){
         add($x, $y, $word, $dire);
+        echo "$x  $y  $word  $dire     /";
     }
+
     return $i;
 }
 

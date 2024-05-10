@@ -34,7 +34,9 @@
     for($y=0; $y < count($table); $y++){
         echo '<tr>';
         for($x=0; $x <  count($table[$y]); $x++){
-            echo '<td>'.'<button style="width:25px; height:25px;">'.$table[$y][$x].'</button>'.'</td>';
+            $button_id = "b".$x."_".$y;
+            echo '<td>'."<button style='width:25px; height:25px;' onclick='fun(\"$button_id\")' id='$button_id'> "
+                .$table[$y][$x].'</button>'.'</td>';
         }
         echo '</tr>';
     }
@@ -88,13 +90,14 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a < $WIDTH){
-                if ($table[$y][$x + $a] != ' ' && $table[$i][$x + $a] != $word[$i])
-                return FALSE;
+                if ($table[$y][$x + $a] != ' ' && $table[$y][$x + $a] != $word[$i])
+                    return FALSE;
             }
             $a++;
-        return TRUE;
         }
+        return TRUE;
     }
+
     function add_n($x, $y, $word){
         global $table, $WIDTH, $HEIGHT;
         $a = 0;
@@ -210,7 +213,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0 && $y + $b <=  $HEIGHT){
-                $table[$x + $a][$y + $b] = $word[$i];
+                $table[$y + $b][$x + $a] = $word[$i];
             }
             $a--;
             $b++;
@@ -223,7 +226,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0 && $y + $b <=  $HEIGHT){
-                if($table[$x + $a][$y + $b] != ' ' && $table[$x + $a][$y + $b] != $word[$i]){
+                if($table[$y + $b][$x + $a] != ' ' && $table[$y + $b][$x + $a] != $word[$i]){
                 return false;}
             }
             $a--;
@@ -237,7 +240,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0){
-                $table[$x + $a][$y] = $word[$i];
+                $table[$y][$x + $a] = $word[$i];
             }
             $a--;
         }
@@ -248,7 +251,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0){
-                if($table[$x + $a][$y] != ' ' && $table[$x + $a][$y] != $word[$i]){
+                if($table[$y][$x + $a] != ' ' && $table[$y][$x + $a] != $word[$i]){
                     return false;
                 }
             }
@@ -263,7 +266,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0 && $y + $b >= 0){
-                $table[$x + $a][$y + $b] = $word[$i];
+                $table[$y + $b][$x + $a] = $word[$i];
             }
             $a--;
             $b--;
@@ -276,7 +279,7 @@
         $len = strlen($word);
         for ($i = 0; $i < $len; $i++){
             if($x + $a >=0 && $y + $b >= 0){
-                if($table[$x + $a][$y + $b] != ' ' && $table[$x + $a][$y + $b] != $word[$i]){
+                if($table[$y + $b][$x + $a] != ' ' && $table[$y + $b][$x + $a] != $word[$i]){
                     return false;
                 }
             }
